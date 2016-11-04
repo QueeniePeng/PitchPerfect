@@ -1,0 +1,68 @@
+Xcode Shortcuts
+--------------------------------------------------------------------------------
+Rotate simulator:
+  Select simulator, press command and left/right arrow.
+
+Setup constrains:
+  press control, drag item to view, when grey panel comes up, press shift to
+  select if more than one will be added
+
+From Code To UI Element
+--------------------------------------------------------------------------------
+In Xcode you can Switch between the Standard and Assistant Editor using the
+buttons on the top right of the status bar.
+
+Assistant Editor
+  This is the interlocking circles button. Click it to switch into the assistant
+  editor.
+
+Standard Editor
+  This is the first button in the series that looks like a set of parallel
+  horizontal lines. The standard editor displays one file at a time.
+
+One last note, you can toggle what file/class shows up in the Assistant Editor
+by using the pulldown menu on the status bar directly above the content in the
+Assistant Editor. This is usually set to "Automatic" but you can change it if
+you want.
+
+Here are a few items to help you along the way:
+--------------------------------------------------------------------------------
+1.Did you notice the filled in circles in the Xcode editor gutter next to
+IBOutlets and IBActions?
+
+They are supposed to indicate when the IBOutlets or IBActions are wired up to a
+UI Element. Unfortunately, there is a bug in Xcode. These circles will only fill
+in once you open the Main.Storyboard file. If you just started Xcode and open a
+view controller, you may be wondering if you connected these or not. Well, you
+likely did, and Xcode has just not read the Main.Storyboard file to figure it out.
+
+2.Are you noticing that your label and/or button are out of place?
+
+This is likely because you've not provided enough constraints or you've provided
+the incorrect constraints. But don't worry, that is a fixable problem, and later
+in the course, we will provide an even better solution for laying out UI
+elements. Note, it is often useful to take a careful look at your constraints
+and work out on paper how they would behave in different device sizes and
+orientations.
+
+Texts:
+--------------------------------------------------------------------------------
+IBOutlets are from code TO UIElement
+IBActions are from UIElement TO code
+
+Attitude:)
+--------------------------------------------------------------------------------
+There are several ways to determine which AutoLayout Constraints you will need.
+The steps we’ve shown so far—to position the two buttons and the label in our
+app—take you through Apple’s recommended path for knowing what constraints to
+create.
+
+It may seem like a lot of work, but AutoLayout is really useful in setting up
+user interfaces to work well for the differently sized screens of the various
+iOS devices.
+
+In programming, you have to keep the attitude of a child. You have to be willing
+to experiment and to try new things. You can’t really break anything at this
+point, you are just positioning UI Elements. Even if Xcode is complaining at
+you, which it will, don’t give up, just go back into thinking about the small
+steps you need to get to your goal. Don’t be afraid to try things out in Xcode.

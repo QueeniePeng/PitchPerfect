@@ -1,0 +1,43 @@
+Quiz: What Does The AVAudioRecorder Code Do?
+--------------------------------------------------------------------------------
+import UIKit
+import AVFoundation
+
+var audioRecorder: AVAudioRecorder!
+
+let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+.userDomainMask, true)[0] as String
+
+let recordingName = "recordedVoice.wav"
+let pathArray = [dirPath, recordingName]
+let filePath = NSURL.fileURL(withPathComponents: pathArray)
+print(filePath!)
+
+let session = AVAudioSession.sharedInstance()
+try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+
+try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
+audioRecorder.isMeteringEnabled = true
+audioRecorder.prepareToRecord()
+audioRecorder.record()
+
+1. Find the local document directory
+2. Name the recorded file
+3. Set and config the audio session category and mode
+4. Record
+
+
+Adding Delegation To RecordSoundsVC
+--------------------------------------------------------------------------------
+Remember that protocols act as a kind of contract. AVAudioRecorder does not know
+what classes you have in your app. However, if you say that your class conforms
+to the AVAudioRecorderDelegate protocol, then it knows it can call a specific
+function in your class.
+
+The specific function has been defined in the protocol (in this case, the
+AVAudioRecorderDelegate protocol). This way your class and the AVAudioRecorder
+are loosely coupled, and they can work together without having to know much
+about each other.
+
+Loose coupling of classes is really useful in building interchangeable pieces
+of code, and used quite a lot in iOS.

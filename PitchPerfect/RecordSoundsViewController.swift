@@ -10,13 +10,25 @@ import UIKit
 import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
-
+    
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
     
-    var audioRecorder: AVAudioRecorder!
+    // grab the PP's document directory and store it as string
+    let dirPath: String
+    let recordingName: String
+    let filePath: AnyObject?
     
+    required init(coder aDecoder: NSCoder) {
+        dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0]
+        recordingName = "recordedVoice.wav"
+        filePath = NSURL.fileURL(withPathComponents: [dirPath, recordingName]) as AnyObject
+        super.init(coder: aDecoder)!
+    }
+    
+    var audioRecorder: AVAudioRecorder!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         stopRecordingButton.isEnabled = true
@@ -33,18 +45,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopRecordingButton.isEnabled = true
         recordButton.isEnabled = false
         
-        // grab the PP's document directory and store it as string
-        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
-        
-        let recordingName = "recordedVoice.wav"
-        let pathArray = [dirPath, recordingName]
-        let filePath = NSURL.fileURL(withPathComponents: pathArray)
-        print(filePath!)
-        
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        
-        try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
+        try! audioRecorder = AVAudioRecorder(url: filePath as! URL, settings: [:])
         
         audioRecorder.delegate = self
         audioRecorder.isMeteringEnabled = true
@@ -63,12 +66,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         try! audioSession.setActive(false)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("View will appear")
-    }
-    
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        print("AVAudioRecorder finished saving recording")
+        print("AVAudioRecorder finished saving recording")        
         if (flag) {
             self.performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         }

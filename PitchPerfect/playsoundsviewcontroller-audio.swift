@@ -13,7 +13,6 @@ import AVFoundation
 extension PlaySoundsViewController: AVAudioPlayerDelegate {
     
     // MARK: Alerts
-    
     struct Alerts {
         static let DismissAlert = "Dismiss"
         static let RecordingDisabledTitle = "Recording Disabled"
@@ -28,11 +27,9 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
     }
     
     // MARK: PlayingState (raw values correspond to sender tags)
-    
     enum PlayingState { case playing, notPlaying }
     
     // MARK: Audio Functions
-    
     func setupAudio() {
         // initialize (recording) audio file
         do {

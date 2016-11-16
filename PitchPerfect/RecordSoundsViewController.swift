@@ -31,6 +31,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Navigation bar title
+        self.title = "Record"
         stopRecordingButton.isEnabled = true
     }
 
@@ -41,7 +43,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBAction func recordAudio(_ sender: AnyObject) {
         print("Record button pressed")
-        recordingLabel.text = "Recording in Progress"
+        recordingLabel.text = "Recording"
         stopRecordingButton.isEnabled = true
         recordButton.isEnabled = false
         
@@ -57,6 +59,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBAction func stopRecording(_ sender: AnyObject) {
         print("Stop recording button pressed")
+        
+        let session = AVAudioSession.sharedInstance()
+        try! session.setCategory(AVAudioSessionCategoryPlayback)
+        
         recordButton.isEnabled = true
         stopRecordingButton.isEnabled = false
         recordingLabel.text = "Tab to Record"
